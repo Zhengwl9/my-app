@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import RouteWithSubRoutes from './router/RouteWithSubRoutes';
-import {Layout, Menu, Breadcrumb, Icon,} from 'antd';
 import {Redirect } from 'react-router-dom';
-const { Content, Sider,} = Layout;
+import {Layout, Menu, Breadcrumb, Icon,} from 'antd';
+const { Content, Sider,Header} = Layout;
 const SubMenu = Menu.SubMenu;
 class App extends Component {
     constructor(props){
@@ -15,8 +15,8 @@ class App extends Component {
         this.setState({ collapsed });
     };
     render() {
-        if(this.props.location.name==="/"){
-            return <Redirect to="/home"></Redirect>
+        if(this.props.location.pathname==='/'){
+            return <Redirect to={'/home/compass'}></Redirect>
         }
         return (
             <div>
@@ -57,14 +57,17 @@ class App extends Component {
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <Content style={{ margin: '0 16px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}><Breadcrumb.Item>User</Breadcrumb.Item><Breadcrumb.Item>Bill</Breadcrumb.Item></Breadcrumb>
-                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                            {this.props.routes.map((route, i) => (
-                                <RouteWithSubRoutes key={i} {...route} />
-                            ))}
-                        </div>
-                    </Content>
+                    <Layout>
+                        <Header style={{ background: '#fff', padding: 0 }} />
+                        <Content style={{ margin: '0 16px' }}>
+                            <Breadcrumb style={{ margin: '16px 0' }}><Breadcrumb.Item>User</Breadcrumb.Item><Breadcrumb.Item>Bill</Breadcrumb.Item></Breadcrumb>
+                            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                                {this.props.routes.map((route, i) => (
+                                    <RouteWithSubRoutes key={i} {...route} />
+                                ))}
+                            </div>
+                        </Content>
+                    </Layout>
                 </Layout>
             </div>
         );
