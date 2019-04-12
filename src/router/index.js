@@ -1,31 +1,12 @@
 import React from 'react';
-import {BrowserRouter as Router, Route } from 'react-router-dom';
+import {BrowserRouter as Router } from 'react-router-dom';
 import Loadable from 'react-loadable';
-
+import RouteWithSubRoutes from './RouteWithSubRoutes';
 let loading=()=><div>Loading...</div>;
 const Home = Loadable({loader: () => import('../components/App'), loading,});
 const Test = Loadable({loader: () => import('../components/test'), loading,});
-// const App = Loadable({loader: () => import('../App'), loading,});
-function App({ routes }) {
-    return (
-        <div>
-            <div>啦啦啦啦</div>
-            {routes.map((route, i) => (
-                <RouteWithSubRoutes key={i} {...route} />
-            ))}
-        </div>
-    );
-}
-function RouteWithSubRoutes(route) {
-    return (
-        <Route
-            path={route.path}
-            render={props => (
-                <route.component {...props} routes={route.routes} />
-            )}
-        />
-    );
-}
+const App = Loadable({loader: () => import('../App'), loading,});
+
 let myRoute=[{
     path: "/",
     component: App,
@@ -34,7 +15,6 @@ let myRoute=[{
         {path: "/test", component: Test}
     ]
 }];
-
 const BasicRoute = () => (
     <Router>
         {myRoute.map((route, i) => (

@@ -4,7 +4,7 @@ class Test extends Component {
     render() {
         return (
             <div className="App">
-                <Button>按钮</Button>
+                <Button onClick={()=>{this.props.history.push('/home')}}>按钮</Button>
             </div>
         );
     }
