@@ -1,21 +1,19 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Loadable from 'react-loadable';
-import Component404 from '../components/404/404'
-
 import RouteWithSubRoutes from './RouteWithSubRoutes';
-
+import Component404 from '../components/404/404'
 let loading = () => <div>Loading...</div>;
 const App = Loadable({loader: () => import('../App'), loading,});
 const Login = Loadable({loader: () => import('../components/login/login'), loading,});
-const Home = Loadable({loader: () => import('../components/App'), loading,});
-const Test = Loadable({loader: () => import('../components/test'), loading,});
+const ProductList = Loadable({loader: () => import('../components/productManage/productList/productList'), loading,});
+const AddProduct = Loadable({loader: () => import('../components/productManage/addProduct/addProduct'), loading,});
 let myRoute = [{
-    path: "/app",
+    path: "/",
     component: App,
     routes: [
-        {path: "/app/compass", component: Home},
-        {path: "/app/test", component: Test},
+        {path: "/productList", name:'商品管理',component: ProductList},
+        {path: "/addProduct", name:'新增商品',component: AddProduct},
     ]
 }];
 const BasicRoute = () => (
