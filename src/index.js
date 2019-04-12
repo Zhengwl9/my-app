@@ -5,11 +5,12 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import todoApp from './store/reducers'
-import App from './components/App'
+import Router from './router';
+import {BrowserRouter } from 'react-router-dom';
 let store = createStore(todoApp);
 render(
     <Provider store={store}>
-        <App />
+        <Router history={BrowserRouter}/>
     </Provider>,
     document.getElementById('root')
 );

@@ -5,7 +5,6 @@ const Link = ({ active, children, onClick }) => {
     if (active) {
         return <span>{children}</span>
     }
-
     return (
         <a
             href="https://www.baidu.com"
