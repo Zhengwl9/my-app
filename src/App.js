@@ -15,9 +15,10 @@ class App extends Component {
         this.setState({ collapsed });
     };
     render() {
-        if(this.props.location.pathname==='/'){
-            return <Redirect to={'/home/compass'}></Redirect>
-        }
+        console.log(this.props.location.pathname)
+        // if(this.props.location.pathname==='/'){
+        //     return <Redirect to={'/compass'}></Redirect>
+        // }
         return (
             <div>
                 <Layout style={{ minHeight: '100vh' }}>

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Icon } from 'antd';
 class Login extends Component{
-    constructor(props){
-        super(props);
-    }
     render(){
         return (
             <div className="login">
