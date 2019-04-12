@@ -7,7 +7,6 @@ class App extends Component {
       <div className="App">
           <Button>按钮</Button>
           <span onClick={()=>{ this.props.history.push("/home");}}>test</span>
-          <div>{this.props.children}</div>
       </div>
     );
   }

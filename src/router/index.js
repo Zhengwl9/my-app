@@ -4,8 +4,18 @@ import Loadable from 'react-loadable';
 
 let loading=()=><div>Loading...</div>;
 const Home = Loadable({loader: () => import('../components/App'), loading,});
-const App = Loadable({loader: () => import('../App'), loading,});
-
+const Test = Loadable({loader: () => import('../components/test'), loading,});
+// const App = Loadable({loader: () => import('../App'), loading,});
+function App({ routes }) {
+    return (
+        <div>
+            <div>啦啦啦啦</div>
+            {routes.map((route, i) => (
+                <RouteWithSubRoutes key={i} {...route} />
+            ))}
+        </div>
+    );
+}
 function RouteWithSubRoutes(route) {
     return (
         <Route
@@ -20,11 +30,10 @@ let myRoute=[{
     path: "/",
     component: App,
     routes: [
-        {path: "/home", component: Home}
+        {path: "/home", component: Home},
+        {path: "/test", component: Test}
     ]
 }];
-
-
 
 const BasicRoute = () => (
     <Router>
