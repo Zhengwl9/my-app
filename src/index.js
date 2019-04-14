@@ -3,14 +3,15 @@ import { render } from 'react-dom'
 import './index.less';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore,applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import todoApp from './store/reducers'
 import Router from './router';
 import { LocaleProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 import {BrowserRouter } from 'react-router-dom';
-let store = createStore(todoApp);
+let store = createStore(todoApp,applyMiddleware(thunk));
 render(
     <LocaleProvider locale={zh_CN}>
         <Provider store={store}>

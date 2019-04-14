@@ -7,11 +7,12 @@ import Component404 from './components/404/404'
 import {firstLogin, loginOut} from './store/actions'
 /**containers**/
 import { connect } from 'react-redux'
-const mapStateToProps = state => ({userinfo:state.userinfo});
 const { Content, Sider} = Layout;
 const Option = Select.Option;
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item; //antd子菜单
+
+@connect((state)=>({userinfo: state.userinfo}))
 class App extends Component {
     constructor(props){
         super(props);
@@ -59,7 +60,6 @@ class App extends Component {
         //退出登录
         if(value==='3'){
             this.props.dispatch(loginOut());
-            this.props.history.push('/login');
             return;
         }
         this.setState({
@@ -67,8 +67,11 @@ class App extends Component {
         })
     }
     render() {
+        if(!sessionStorage.getItem('token')){
+            return <Redirect to={'/login'}/>
+        }
         if(this.props.location.pathname==='/'){
-            return <Redirect to={'/productList'}></Redirect>
+            return <Redirect to={'/productList'}/>
         }
         if(!this.props.routes.find(item => item.path === this.props.location.pathname)){
             return <Component404/>
@@ -141,4 +144,4 @@ class App extends Component {
     }
 }
 
-export default connect(mapStateToProps)(App);
+export default (App);

@@ -27,7 +27,6 @@ instance.interceptors.response.use(
             switch (err.response.status) {
                 case 401:
                     window.myReact.props.dispatch(loginOut());
-                    window.myReact.props.history.push({path:"/login"});
                     break;
                 default:
                     break;

@@ -1,23 +1,22 @@
 import React from 'react'
-import {Form, Icon, Input, Button,Select,message} from 'antd';
+import {Form, Icon, Input, Button,Select} from 'antd';
 import './login.less'
-import Axios from '../../common/Axios'
 import { connect } from 'react-redux'
-import { firstLogin} from '../../store/actions'
+import {login} from '../../store/actions'
 const Option = Select.Option;
+
+const formCreate = Form.create;
+@formCreate()
+@connect(
+    () => ({}),
+    {login}
+)
 class NormalLoginForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                Axios.post('/user/login', values).then(data=>{
-                    if(data){
-                        this.props.dispatch(firstLogin(data.data.userInfo));
-                        message.success('登录成功！' );
-                        console.log(1);
-                        this.props.history.push('/productList');
-                    }
-                });
+                this.props.login(values,this.props.history);
             }
         });
     };
@@ -64,7 +63,6 @@ class NormalLoginForm extends React.Component {
     }
 }
 
-let WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
-WrappedNormalLoginForm = connect()(WrappedNormalLoginForm);
-export default WrappedNormalLoginForm
+
+export default NormalLoginForm
 

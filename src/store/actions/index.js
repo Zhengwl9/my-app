@@ -1,27 +1,5 @@
-let nextTodoId = 0;
-export const addTodo = text => {
-    return {
-        type: 'ADD_TODO',
-        id: nextTodoId++,
-        text
-    }
-};
-
-export const setVisibilityFilter = filter => {
-    return {
-        type: 'SET_VISIBILITY_FILTER',
-        filter
-    }
-};
-
-export const toggleTodo = id => {
-    return {
-        type: 'TOGGLE_TODO',
-        id
-    }
-};
-
-
+import Axios from '../../common/Axios'
+import {message} from "antd";
 /**新增 用户登入登出**/
 export const firstLogin = userInfo => {
     return {
@@ -29,6 +7,22 @@ export const firstLogin = userInfo => {
         userInfo
     }
 };
+
+export const login=(values,history)=>{
+    return (dispatch,getState)=>{
+        // console.log(getState());
+        Axios.post('/user/login', values).then(data=>{
+            console.log(data);
+            if(data){
+                dispatch(firstLogin(data.data.userInfo));
+                message.success('登录成功！' );
+                history.push('/productList');
+            }
+        });
+    }
+};
+
+
 export const loginOut = () => {
     return {
         type: 'LOGINOUT',
